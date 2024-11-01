@@ -16,7 +16,7 @@ public final class BuggyPolynomial<T> {
     /**
      * a constructor for the Polynomial class
      * sets the coefficients p0, p1, ..., pm
-     * @param coefficients
+     * @param coefficients the coefficient list of the polynomial
      */
     private BuggyPolynomial(List<T> coefficients) {
         //null check
@@ -26,9 +26,8 @@ public final class BuggyPolynomial<T> {
 
     /**
      * a method to return a new polynomial created from an immutable copy of the input list
-     * @param <S>
-     * @param coefficients
-     * @return a new polynomial
+     * @param coefficients the coefficient list of the polynomial
+     * @return a new polynomial that has the same coefficients as the input list
      */
     public static final <S> BuggyPolynomial<S> from(List<S> coefficients) {
         return new BuggyPolynomial<>(List.copyOf(coefficients)); 
@@ -57,8 +56,8 @@ public final class BuggyPolynomial<T> {
      * b: (4, 5, 6)
      * a + b = (5, 7, 9)
      * McCabe's Complexity: 3
-     * @param other
-     * @param ring
+     * @param other the other polynomial being added
+     * @param ring the ring of the polynomial
      * @return the sum
      */
     public BuggyPolynomial<T> plus(BuggyPolynomial<T> other, Ring<T> ring) {
@@ -93,10 +92,9 @@ public final class BuggyPolynomial<T> {
 
     /**
      *  a helper method for the plus method to assign determine if an addend should be assigned to a value or zero
-     * @param ring
-     * @param list
-     * @param aIter
-     * @param i
+     * @param ring the ring of the polynomial
+     * @param list the list being checked
+     * @param iterator the iterator of the polynomial
      * @return the assignemnt given the condition
      */
     private T getAddend(Ring<T> ring, List<T> list, ListIterator<T> iterator) {
@@ -120,8 +118,8 @@ public final class BuggyPolynomial<T> {
      * 
      *       = (4, 13, 28, 27, 18)
      * McCabe's Complexity: 3
-     * @param other
-     * @param ring
+     * @param other the other polynomial
+     * @param ring the ring of the polynomial
      * @return the product
      */
     public BuggyPolynomial<T> times(BuggyPolynomial<T> other, Ring<T> ring) {
@@ -166,16 +164,16 @@ public final class BuggyPolynomial<T> {
 
     /**
      * a helper method to compute whether an index should be incremented in the times method
-     * @param currentIndex
-     * @param startIndex
-     * @param list
+     * @param currentIndex the current index of the polynomial
+     * @param startIndex the start index of the polynomial
+     * @param coefficient the coefficient list
      * @return the start index
      */
-    private int computeStartIndex(int currentIndex, int startIndex, List<T> list) {
+    private int computeStartIndex(int currentIndex, int startIndex, List<T> coefficient) {
         //null check
-        assert list != null : "list cannot be null";
+        assert list != null : "coefficient cannot be null";
 
-        if ((currentIndex + 1) >= list.size()) {
+        if ((currentIndex + 1) >= coefficient.size()) {
             startIndex = startIndex + 1;
         }
         return startIndex;
@@ -184,19 +182,19 @@ public final class BuggyPolynomial<T> {
     /**
      * a helper method to handle the edge case where both polynomials have no coefficients in the times method
      * avoids an OutOfBoundsException
-     * @param a
-     * @param b
+     * @param a_coefficients the coefficients of the first polynomial
+     * @param b_coefficients the coefficients of the second polynomial
      */
-    private int computeProductLength(List<T> a, List<T> b) {
+    private int computeProductLength(List<T> a_coefficients, List<T> b_coefficients) {
 
         //null checks
-        assert a != null : "a cannot be null";
-        assert b != null : "b cannot be null";
+        assert a_coefficients != null : "a_coefficients cannot be null";
+        assert b_coefficients != null : "b_coefficients cannot be null";
 
-        if (a.isEmpty() && b.isEmpty()) {
+        if (a_coefficients.isEmpty() && b_coefficients.isEmpty()) {
             return 0;
         }
-        return a.size() + b.size() - 1;
+        return a_coefficients.size() + b_coefficients.size() - 1;
     }
 
     public static void main(String[] args) {
