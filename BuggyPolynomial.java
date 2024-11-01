@@ -70,8 +70,8 @@ public final class BuggyPolynomial<T> {
         List<T> a = this.getCoefficients(); //coefficients of the first polynomial
         List<T> b = other.getCoefficients(); //coefficients of the second polynomial
 
-        int minLength = Math.min(a.size(), b.size()); //computing the length of the longer list
-        List<T> sum_list = new ArrayList<>(minLength); //a new list storing the sum values
+        int maxLength = Math.max(a.size(), b.size()); //computing the length of the longer list
+        List<T> sum_list = new ArrayList<>(maxLength); //a new list storing the sum values
 
         //initializing the iterators
         ListIterator<T> aIter = a.listIterator();
@@ -104,7 +104,7 @@ public final class BuggyPolynomial<T> {
         assert ring != null : "ring cannot be null";
         assert list != null : "list cannot be null";
         assert iterator != null : "iterator cannot be null";
-        return (iterator.hasNext()) ? ring.zero() : iterator.next();
+        return (iterator.hasNext()) ? ring.next() : iterator.zero();
     }
 
     /**
