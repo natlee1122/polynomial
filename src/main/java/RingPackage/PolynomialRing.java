@@ -7,7 +7,7 @@ import java.util.Objects;
  * @author Vidyut Veedgav
  * a class to demonstrate the concept of Rings on Polynomials
  */
-public final class PolynomialRing<T> implements Ring<BuggyPolynomial<T>> {
+public final class PolynomialRing<T> implements Ring<WorkingPolynomial<T>> {
 
     private Ring<T> baseRing; //a private field storing a ring 
 
@@ -38,23 +38,23 @@ public final class PolynomialRing<T> implements Ring<BuggyPolynomial<T>> {
      * overriding the zero method
      */
     @Override
-    public BuggyPolynomial<T> zero() {
-        return BuggyPolynomial.from(List.of());
+    public WorkingPolynomial<T> zero() {
+        return WorkingPolynomial.from(List.of());
     }
 
     /**
      * overriding the identity method
      */
     @Override
-    public BuggyPolynomial<T> identity() {
-        return BuggyPolynomial.from(List.of(baseRing.identity()));
+    public WorkingPolynomial<T> identity() {
+        return WorkingPolynomial.from(List.of(baseRing.identity()));
     }
 
     /**
      * overriding the sum method
      */
     @Override
-    public BuggyPolynomial<T> sum(BuggyPolynomial<T> x, BuggyPolynomial<T> y) {
+    public WorkingPolynomial<T> sum(WorkingPolynomial<T> x, WorkingPolynomial<T> y) {
         //null checks
         Objects.requireNonNull(x, "x cannot be null");
         Objects.requireNonNull(y, "y cannot be null");
@@ -66,7 +66,7 @@ public final class PolynomialRing<T> implements Ring<BuggyPolynomial<T>> {
      * overriding the product method
      */
     @Override
-    public BuggyPolynomial<T> product(BuggyPolynomial<T> x, BuggyPolynomial<T> y) {
+    public WorkingPolynomial<T> product(WorkingPolynomial<T> x, WorkingPolynomial<T> y) {
         //null checks
         Objects.requireNonNull(x, "x cannot be null");
         Objects.requireNonNull(y, "y cannot be null");
@@ -77,8 +77,8 @@ public final class PolynomialRing<T> implements Ring<BuggyPolynomial<T>> {
     public static void main(String[] args) {
 
         PolynomialRing<Integer> ring = PolynomialRing.instance(new IntegerRing());
-        BuggyPolynomial<Integer> p1 = BuggyPolynomial.from(List.of(1,2, 3));
-        BuggyPolynomial<Integer> p2 = BuggyPolynomial.from(List.of(4,5, 6));
+        WorkingPolynomial<Integer> p1 = WorkingPolynomial.from(List.of(1,2, 3));
+        WorkingPolynomial<Integer> p2 = WorkingPolynomial.from(List.of(4,5, 6));
         System.out.println(ring.product(p1, p2));
     }
 

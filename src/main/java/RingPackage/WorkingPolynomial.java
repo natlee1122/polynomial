@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author Vidyut Veedgav
  * a class representing a polynomial ring, meant to emulate functionality for polynomials
  */
-public final class BuggyPolynomial<T> {
+public final class WorkingPolynomial<T> {
     
     private final List<T> coefficients; //a private instance field representing the polynomial's coefficients
 
@@ -18,7 +18,7 @@ public final class BuggyPolynomial<T> {
      * sets the coefficients p0, p1, ..., pm
      * @param coefficients the coefficient list of the polynomial
      */
-    private BuggyPolynomial(List<T> coefficients) {
+    private WorkingPolynomial(List<T> coefficients) {
         //null check
         assert coefficients != null : "coefficients cannot be null";
         this.coefficients = coefficients;
@@ -29,8 +29,8 @@ public final class BuggyPolynomial<T> {
      * @param coefficients the coefficient list of the polynomial
      * @return a new polynomial that has the same coefficients as the input list
      */
-    public static final <S> BuggyPolynomial<S> from(List<S> coefficients) {
-        return new BuggyPolynomial<>(List.copyOf(coefficients)); 
+    public static final <S> WorkingPolynomial<S> from(List<S> coefficients) {
+        return new WorkingPolynomial<>(List.copyOf(coefficients)); 
     }
 
     /**
@@ -60,7 +60,7 @@ public final class BuggyPolynomial<T> {
      * @param ring the ring of the polynomial
      * @return the sum
      */
-    public BuggyPolynomial<T> plus(BuggyPolynomial<T> other, Ring<T> ring) {
+    public WorkingPolynomial<T> plus(WorkingPolynomial<T> other, Ring<T> ring) {
 
         //null checks
         Objects.requireNonNull(other, "the 'other' parameter cannot be null");
@@ -87,7 +87,7 @@ public final class BuggyPolynomial<T> {
             T sum = ring.sum(a_addend, b_addend); //computes the sum of the addends
             sum_list.add(sum); //adds the sum to the sum_list, which will be used to create the returned polynomial
         }
-        return new BuggyPolynomial<>(sum_list);
+        return new WorkingPolynomial<>(sum_list);
     }
 
     /**
@@ -165,7 +165,7 @@ public final class BuggyPolynomial<T> {
 
     // I was not able to get the iterator method working since I was confused with the computeStartIndex method
     // Created my own version of times which works
-    public BuggyPolynomial<T> times(BuggyPolynomial<T> other, Ring<T> ring) {
+    public WorkingPolynomial<T> times(WorkingPolynomial<T> other, Ring<T> ring) {
 
         // Null checks
         Objects.requireNonNull(other, "the 'other' parameter cannot be null");
@@ -197,7 +197,7 @@ public final class BuggyPolynomial<T> {
                 product_list.set(resultIndex, ring.sum(currentSum, termProduct));
             }
         }
-        return new BuggyPolynomial<>(product_list);
+        return new WorkingPolynomial<>(product_list);
     }
     
 
@@ -239,8 +239,8 @@ public final class BuggyPolynomial<T> {
     public static void main(String[] args) {
         Ring<Integer> intRing = new IntegerRing();
         PolynomialRing<Integer> polyRing = PolynomialRing.instance(intRing);
-        BuggyPolynomial p1 = BuggyPolynomial.from(List.of(1, 2, 3));
-        BuggyPolynomial p2 = BuggyPolynomial.from(List.of(1, 2, 3));
+        WorkingPolynomial p1 = WorkingPolynomial.from(List.of(1, 2, 3));
+        WorkingPolynomial p2 = WorkingPolynomial.from(List.of(1, 2, 3));
 
         System.out.println(p1.plus(p2, polyRing));
 

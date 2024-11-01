@@ -29,29 +29,29 @@ public class RingTesting {
         Ring<Integer> ring = new IntegerRing();
 
         //test 0
-        BuggyPolynomial<Integer> a = BuggyPolynomial.from(List.of());
-        BuggyPolynomial<Integer> b = BuggyPolynomial.from(List.of());
-        BuggyPolynomial<Integer> result = BuggyPolynomial.from(a.plus(b, ring).getCoefficients());
+        WorkingPolynomial<Integer> a = WorkingPolynomial.from(List.of());
+        WorkingPolynomial<Integer> b = WorkingPolynomial.from(List.of());
+        WorkingPolynomial<Integer> result = WorkingPolynomial.from(a.plus(b, ring).getCoefficients());
         assertEquals(true, result.getCoefficients().isEmpty());
 
         //test 1
-        a = BuggyPolynomial.from(List.of(1));
-        b = BuggyPolynomial.from(List.of(1));
-        result = BuggyPolynomial.from(a.plus(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1));
+        b = WorkingPolynomial.from(List.of(1));
+        result = WorkingPolynomial.from(a.plus(b, ring).getCoefficients());
         assertEquals(true, result.getCoefficients().get(0).equals(2));
 
         //test many
-        a = BuggyPolynomial.from(List.of(1, 2, 3));
-        b = BuggyPolynomial.from(List.of(4, 5, 6));
-        result = BuggyPolynomial.from(a.plus(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1, 2, 3));
+        b = WorkingPolynomial.from(List.of(4, 5, 6));
+        result = WorkingPolynomial.from(a.plus(b, ring).getCoefficients());
         assertEquals(List.of(5, 7, 9), result.getCoefficients());
 
         //test polynomials of different lengths
-        a = BuggyPolynomial.from(List.of(1, 2, 3, 4, 5));
-        b = BuggyPolynomial.from(List.of(4, 5, 6));
-        result = BuggyPolynomial.from(a.plus(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1, 2, 3, 4, 5));
+        b = WorkingPolynomial.from(List.of(4, 5, 6));
+        result = WorkingPolynomial.from(a.plus(b, ring).getCoefficients());
         assertEquals(List.of(5, 7, 9, 4, 5), result.getCoefficients());
-        result = BuggyPolynomial.from(b.plus(a, ring).getCoefficients());
+        result = WorkingPolynomial.from(b.plus(a, ring).getCoefficients());
         assertEquals(List.of(5, 7, 9, 4, 5), result.getCoefficients());
     }
 
@@ -66,29 +66,29 @@ public class RingTesting {
         Ring<Integer> ring = new IntegerRing();
 
         //test 0
-        BuggyPolynomial<Integer> a = BuggyPolynomial.from(List.of());
-        BuggyPolynomial<Integer> b = BuggyPolynomial.from(List.of());
-        BuggyPolynomial<Integer> result = BuggyPolynomial.from(a.times(b, ring).getCoefficients());
+        WorkingPolynomial<Integer> a = WorkingPolynomial.from(List.of());
+        WorkingPolynomial<Integer> b = WorkingPolynomial.from(List.of());
+        WorkingPolynomial<Integer> result = WorkingPolynomial.from(a.times(b, ring).getCoefficients());
         assertEquals(true, result.getCoefficients().isEmpty());
 
         //test 1
-        a = BuggyPolynomial.from(List.of(1));
-        b = BuggyPolynomial.from(List.of(1));
-        result = BuggyPolynomial.from(a.times(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1));
+        b = WorkingPolynomial.from(List.of(1));
+        result = WorkingPolynomial.from(a.times(b, ring).getCoefficients());
         assertEquals(List.of(1), result.getCoefficients());
 
         //test many
-        a = BuggyPolynomial.from(List.of(1, 2, 3));
-        b = BuggyPolynomial.from(List.of(4, 5, 6));
-        result = BuggyPolynomial.from(a.times(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1, 2, 3));
+        b = WorkingPolynomial.from(List.of(4, 5, 6));
+        result = WorkingPolynomial.from(a.times(b, ring).getCoefficients());
         assertEquals(List.of(4, 13, 28, 27, 18), result.getCoefficients());
 
         //test polynomials of different lengths
-        a = BuggyPolynomial.from(List.of(1, 2, 3, 4, 5));
-        b = BuggyPolynomial.from(List.of(4, 5, 6));
-        result = BuggyPolynomial.from(a.times(b, ring).getCoefficients());
+        a = WorkingPolynomial.from(List.of(1, 2, 3, 4, 5));
+        b = WorkingPolynomial.from(List.of(4, 5, 6));
+        result = WorkingPolynomial.from(a.times(b, ring).getCoefficients());
         assertEquals(List.of(4, 13, 28, 43, 58, 49, 30), result.getCoefficients());
-        result = BuggyPolynomial.from(b.times(a, ring).getCoefficients());
+        result = WorkingPolynomial.from(b.times(a, ring).getCoefficients());
         assertEquals(List.of(4, 13, 28, 43, 58, 49, 30), result.getCoefficients());
     }
 }
