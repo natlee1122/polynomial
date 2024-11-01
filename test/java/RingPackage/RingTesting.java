@@ -53,6 +53,12 @@ public class RingTesting {
         assertEquals(List.of(5, 7, 9, 4, 5), result.getCoefficients());
         result = WorkingPolynomial.from(b.plus(a, ring).getCoefficients());
         assertEquals(List.of(5, 7, 9, 4, 5), result.getCoefficients());
+
+        // Negative coefficients
+        a = WorkingPolynomial.from(List.of(1, -2, 3));
+        b = WorkingPolynomial.from(List.of(-4, 5, -6));
+        result = a.plus(b, ring);
+        assertEquals(List.of(-3, 3, -3), result.getCoefficients());
     }
 
     /**
@@ -90,6 +96,24 @@ public class RingTesting {
         assertEquals(List.of(4, 13, 28, 43, 58, 49, 30), result.getCoefficients());
         result = WorkingPolynomial.from(b.times(a, ring).getCoefficients());
         assertEquals(List.of(4, 13, 28, 43, 58, 49, 30), result.getCoefficients());
-    }
+
+        //test with zero in coefficient
+        a = WorkingPolynomial.from(List.of(1, 0, 3));
+        b = WorkingPolynomial.from(List.of(4, 0, 6));
+        result = a.times(b, ring);
+        assertEquals(List.of(4, 0, 18, 0, 18), result.getCoefficients());
+
+        // Identity element in multiplication
+        a = WorkingPolynomial.from(List.of(1, 2, 3));
+        b = WorkingPolynomial.from(List.of(1));
+        result = a.times(b, ring);
+        assertEquals(List.of(1, 2, 3), result.getCoefficients());
+
+        // Negative coefficients
+        a = WorkingPolynomial.from(List.of(1, -2, 3));
+        b = WorkingPolynomial.from(List.of(-4, 5, -6));
+        result = a.times(b, ring);
+        assertEquals(List.of(-4, 13, -28, 27, -18), result.getCoefficients());
+    }        
 }
 
