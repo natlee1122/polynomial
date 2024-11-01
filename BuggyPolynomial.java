@@ -159,13 +159,17 @@ public final class BuggyPolynomial<T> {
                 T result = ring.product(a_factor, b_factor); //multiplies the factors
                 product = ring.sum(product, result); //sums the result of the multiplication with the previous result
             }
+            product_list.add(product);
         }        
        return new BuggyPolynomial<>(product_list); 
     }
 
     /**
      * a helper method to compute whether an index should be incremented in the times method
-     * @param args
+     * @param currentIndex
+     * @param startIndex
+     * @param list
+     * @return the start index
      */
     private int computeStartIndex(int currentIndex, int startIndex, List<T> list) {
         //null check
@@ -180,7 +184,8 @@ public final class BuggyPolynomial<T> {
     /**
      * a helper method to handle the edge case where both polynomials have no coefficients in the times method
      * avoids an OutOfBoundsException
-     * @param args
+     * @param a
+     * @param b
      */
     private int computeProductLength(List<T> a, List<T> b) {
 
@@ -189,7 +194,7 @@ public final class BuggyPolynomial<T> {
         assert b != null : "b cannot be null";
 
         if (a.isEmpty() && b.isEmpty()) {
-            return 1;
+            return 0;
         }
         return a.size() + b.size() - 1;
     }
