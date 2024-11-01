@@ -1,0 +1,5 @@
+.vscode
+lib/*
+build/*
+report/*
+.DS_Store
