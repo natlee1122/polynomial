@@ -77,7 +77,7 @@ public final class BuggyPolynomial<T> {
         ListIterator<T> bIter = b.listIterator();
 
         //iterating until the longer list's index is reached
-        while (aIter.hasNext() && bIter.hasNext()) { 
+        while (aIter.hasNext() || bIter.hasNext()) { 
 
             //  for each of the lists, checks if the end of the list is reached, 
             //  and either assigns the addend to the coefficient at the index or zero
