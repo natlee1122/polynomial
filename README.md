@@ -8,3 +8,4 @@ This project involves debugging and improving a simple implementation of algebra
 
 ### Debugging Process
 1. Make sure that comments and the code are aligned
+2. 

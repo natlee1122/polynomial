@@ -102,7 +102,7 @@ public final class BuggyPolynomial<T> {
         assert ring != null : "ring cannot be null";
         assert list != null : "list cannot be null";
         assert iterator != null : "iterator cannot be null";
-        return (iterator.hasNext()) ? ring.next() : iterator.zero();
+        return (iterator.hasNext()) ? iterator.next() : ring.zero();
     }
 
     /**
@@ -171,7 +171,7 @@ public final class BuggyPolynomial<T> {
      */
     private int computeStartIndex(int currentIndex, int startIndex, List<T> coefficient) {
         //null check
-        assert list != null : "coefficient cannot be null";
+        assert coefficient != null : "coefficient cannot be null";
 
         if ((currentIndex + 1) >= coefficient.size()) {
             startIndex = startIndex + 1;
@@ -197,6 +197,7 @@ public final class BuggyPolynomial<T> {
         return a_coefficients.size() + b_coefficients.size() - 1;
     }
 
+    /*
     public static void main(String[] args) {
         Ring<Integer> intRing = new IntegerRing();
         PolynomialRing<Integer> polyRing = PolynomialRing.instance(intRing);
@@ -206,5 +207,6 @@ public final class BuggyPolynomial<T> {
         System.out.println(p1.plus(p2, polyRing));
 
     }
+        */
 }
 
