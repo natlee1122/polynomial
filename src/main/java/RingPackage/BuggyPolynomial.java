@@ -121,7 +121,7 @@ public final class BuggyPolynomial<T> {
      * @param other the other polynomial
      * @param ring the ring of the polynomial
      * @return the product
-     */
+     *
     public BuggyPolynomial<T> times(BuggyPolynomial<T> other, Ring<T> ring) {
 
         //null checks
@@ -161,6 +161,45 @@ public final class BuggyPolynomial<T> {
         }        
        return new BuggyPolynomial<>(product_list); 
     }
+    */
+
+    // I was not able to get the iterator method working since I was confused with the computeStartIndex method
+    // Created my own version of times which works
+    public BuggyPolynomial<T> times(BuggyPolynomial<T> other, Ring<T> ring) {
+
+        // Null checks
+        Objects.requireNonNull(other, "the 'other' parameter cannot be null");
+        Objects.requireNonNull(ring, "the 'ring' parameter cannot be null"); 
+        
+        List<T> a = this.getCoefficients(); 
+        List<T> b = other.getCoefficients(); 
+    
+        int productLength = computeProductLength(a, b); 
+        List<T> product_list = new ArrayList<>(productLength);
+    
+        // Initialize `product_list` with zeros for accumulation
+        for (int i = 0; i < productLength; i++) {
+            product_list.add(ring.zero());
+        }
+    
+        // Main loop over `a`
+        for (int i = 0; i < a.size(); i++) {
+            T aTerm = a.get(i); // Get the term from `a` at index `i`
+    
+            // Secondary loop over `b`
+            for (int j = 0; j < b.size(); j++) {
+                T bTerm = b.get(j); // Get the term from `b` at index `j`
+                T termProduct = ring.product(aTerm, bTerm); // Multiply terms
+    
+                // Accumulate at the correct index
+                int resultIndex = i + j;
+                T currentSum = product_list.get(resultIndex);
+                product_list.set(resultIndex, ring.sum(currentSum, termProduct));
+            }
+        }
+        return new BuggyPolynomial<>(product_list);
+    }
+    
 
     /**
      * a helper method to compute whether an index should be incremented in the times method
@@ -197,7 +236,6 @@ public final class BuggyPolynomial<T> {
         return a_coefficients.size() + b_coefficients.size() - 1;
     }
 
-    /*
     public static void main(String[] args) {
         Ring<Integer> intRing = new IntegerRing();
         PolynomialRing<Integer> polyRing = PolynomialRing.instance(intRing);
@@ -207,6 +245,5 @@ public final class BuggyPolynomial<T> {
         System.out.println(p1.plus(p2, polyRing));
 
     }
-        */
 }
 
